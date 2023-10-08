@@ -27,6 +27,8 @@
 
         /* simple function to update the global operator */
         function update_operator(op) {
+            if (glob_operator == op) return
+            
             glob_operator = op
 
             if (glob_operator == "=") {
