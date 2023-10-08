@@ -28,7 +28,7 @@
         /* simple function to update the global operator */
         function update_operator(op) {
             if (glob_operator == op) return
-            
+
             glob_operator = op
 
             if (glob_operator == "=") {
@@ -65,6 +65,7 @@
                 memory = [];
                 opmemory = [];
                 result = 0;
+                z = 0;
             } else {
                 memory.push(eval(glob_output));
                 opmemory.push(glob_operator);
