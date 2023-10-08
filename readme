@@ -1,0 +1,12 @@
+my html calculator (v1.0.0)
+
+allows multiple length numbers
+only supports + and -
+press the equal sign to get your result.
+
+0-9 are supported (those are hopefully the only numbers you'll need...)
+
+note:
+
+        the clear button is also the equal sign. this was not intended, but that
+        is how it's designed. please don't kill me.

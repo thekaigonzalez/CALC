@@ -1,0 +1,103 @@
+<!--Copyright 2019-2023 Kai D. Gonzalez-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        // creating global calculator variables
+        var glob_output = "";
+        var glob_operator = "";
+        var memory = []; /* to save all numbers */
+        var opmemory = []; /* to save all operators */
+        var result = 0;
+
+        /* simple function to update the global output */
+        function update_output(n) {
+            glob_output += n;
+            refresh()
+        }
+
+        function refresh() {
+            document.getElementById("output").innerHTML = glob_output;
+        }
+
+        /* simple function to update the global operator */
+        function update_operator(op) {
+            glob_operator = op
+
+            if (glob_operator == "=") {
+                memory.push(glob_output);
+                console.log(memory);
+                let i = 0;
+                let z = 0;
+
+                var previous = '';
+
+                memory.forEach(n => {
+                    if (opmemory[i] == "+") {
+                        previous = opmemory[i];
+                        result += eval(n);
+                    }
+                    else if (opmemory[i] == "-") {
+                        previous = opmemory[i];
+
+                        if (z == 0)
+                            result = eval(n);
+                        else
+                            result -= eval(n);
+                        z = 1; // allows the first number to be subtracted 
+                        // by the other numbers in the array
+
+                    }
+                    if (opmemory[i] != previous)
+                        i++;
+                });
+
+
+                glob_output = result;
+                refresh()
+                memory = [];
+                opmemory = [];
+                result = 0;
+            } else {
+                memory.push(eval(glob_output));
+                opmemory.push(glob_operator);
+                refresh();
+                glob_output = "";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- BEGIN FIELD OF OUTPUT -->
+    <p id="output">
+        0
+    </p>
+    <!-- END FIELD OF OUTPUT -->
+    <hr>
+    <!-- BEGIN BUTTONS -->
+    <button onclick="update_output('0')">0</button>
+    <button onclick="update_output('1')">1</button>
+    <button onclick="update_output('2')">2</button>
+    <button onclick="update_output('3')">3</button>
+    <button onclick="update_output('4')">4</button>
+    <button onclick="update_output('5')">5</button>
+    <button onclick="update_output('6')">6</button>
+    <button onclick="update_output('7')">7</button>
+    <button onclick="update_output('8')">8</button>
+    <button onclick="update_output('9')">9</button>
+    <!-- END BUTTONS -->
+    <br><br>
+    <!-- BEGIN OPERATORS -->
+    <button onclick="update_operator('+')">+</button>
+    <button onclick="update_operator('-')">-</button>
+    <button onclick="update_operator('=')">=</button>
+    <!-- END OPERATORS -->
+</body>
+
+</html>
